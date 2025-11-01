@@ -3,8 +3,7 @@
   "version": "1.0.0",
   "packages": [
     "packages/*",
-    "app/*"
+    "apps/*"
   ],
-  "npmClient": "npm",
-  "hoist": "true"
+  "npmClient": "npm"
 }

@@ -10,5 +10,8 @@
   "dependencies": {},
   "devDependencies": {
     "lerna": "^9.0.0"
+  },
+  "scripts": {
+    "dev": "lerna run dev --parallel"
   }
 }

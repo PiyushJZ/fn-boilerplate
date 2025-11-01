@@ -7,6 +7,19 @@ export default defineNuxtConfig({
     '@nuxt/eslint',
     '@nuxt/image',
     '@nuxt/scripts',
-    '@nuxt/ui'
+    '@nuxt/ui',
+    '@vueuse/nuxt',
+    '@pinia/nuxt',
+    '@pinia/colada-nuxt',
+    '@nuxt/devtools',
+    '@formkit/auto-animate',
+    '@nuxtjs/i18n',
+    '@nuxtjs/color-mode',
+    '@nuxtjs/tailwindcss',
+    '@nuxtjs/device',
+    'nuxt-csurf',
+    'nuxt-security',
+    '@vee-validate/nuxt',
+    'dayjs-nuxt'
   ]
 })
