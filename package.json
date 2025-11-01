@@ -1,0 +1,14 @@
+{
+  "name": "fn-boilerplate",
+  "description": "Fullstack boilerplate using Fastify and Nuxt",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "dependencies": {},
+  "devDependencies": {
+    "lerna": "^9.0.0"
+  }
+}
