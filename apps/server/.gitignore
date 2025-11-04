@@ -65,3 +65,5 @@ test/types/index.js
 dist
 
 /generated/prisma
+
+/src/generated/prisma
