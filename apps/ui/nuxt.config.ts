@@ -3,6 +3,11 @@ export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
   devtools: { enabled: true },
   css: ["@/assets/css/main.css"],
+  colorMode: {
+    preference: "light",
+    fallback: "light",
+    disableTransition: false,
+  },
   modules: [
     "@nuxt/eslint",
     "@nuxt/image",
@@ -18,7 +23,6 @@ export default defineNuxtConfig({
     "@nuxt/devtools",
     "@formkit/auto-animate",
     "@nuxtjs/i18n",
-    "@nuxtjs/color-mode",
     "@nuxtjs/device",
     "@vee-validate/nuxt",
     "dayjs-nuxt",
