@@ -67,3 +67,5 @@ dist
 /generated/prisma
 
 /src/generated/prisma
+
+tmp

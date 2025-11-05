@@ -71,12 +71,12 @@ const app: FastifyPluginAsync<AppOptions> = async (fastify, opts): Promise<void>
     options: opts,
   });
 
-  // This loads all plugins defined in routes
-  // define your routes in one of these
+  // This loads all plugins defined in modules
+  // define your modules in one of these
   // eslint-disable-next-line no-void
   void fastify.register(AutoLoad, {
-    dir: join(__dirname, "routes"),
-    options: opts,
+    dir: join(__dirname, "modules"),
+    options: { ...opts, prefix: "/api" },
   });
 };
 

@@ -1,0 +1,3 @@
+### GET request for ping health-check
+GET {{host}}/ping
+Accept: text/plain

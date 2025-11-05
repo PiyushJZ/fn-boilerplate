@@ -3,9 +3,6 @@ import Config from "./config";
 
 export const logger = pino({
   level: "info",
-  formatters: {
-    level: (label) => ({ level: label }),
-  },
   transport: {
     targets: [
       {

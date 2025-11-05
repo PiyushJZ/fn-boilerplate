@@ -13,7 +13,6 @@ import {
   openAPI,
 } from "better-auth/plugins";
 import { passkey } from "better-auth/plugins/passkey";
-import { sso } from "@better-auth/sso";
 import { PrismaClient } from "@/generated/prisma/client";
 
 const prisma = new PrismaClient();
@@ -76,7 +75,6 @@ export const auth = betterAuth({
     admin(),
     apiKey(),
     organization(),
-    sso(),
     captcha({
       provider: "cloudflare-turnstile",
       secretKey: "",
