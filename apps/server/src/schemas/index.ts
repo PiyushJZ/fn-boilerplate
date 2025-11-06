@@ -1,7 +1,7 @@
 import Ajv, { JSONSchemaType } from "ajv";
 import addFormats from "ajv-formats";
 
-const ajv = new Ajv({ useDefaults: true, allErrors: true });
+const ajv = new Ajv({ useDefaults: true, allErrors: true, coerceTypes: true });
 addFormats(ajv, [
   "date-time",
   "iso-date-time",

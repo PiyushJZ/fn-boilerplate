@@ -5,6 +5,9 @@ dotenv.config();
 
 const config: Config = {
   NODE_ENV: process.env.NODE_ENV ?? "dev",
+  PORT: process.env.PORT ?? "8080",
+  FASTIFY_ADDRESS: process.env.FASTIFY_ADDRESS ?? "localhost",
+  FASTIFY_LOG_LEVEL: process.env.FASTIFY_LOG_LEVEL ?? "info",
   LOKI_URL: process.env.LOKI_URL ?? "http://localhost:3100",
   LOGS_PATH: process.env.LOGS_PATH ?? "tmp/logs/server.log",
 };
