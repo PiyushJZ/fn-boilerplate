@@ -2,6 +2,7 @@ import { join } from "node:path";
 import AutoLoad, { AutoloadPluginOptions } from "@fastify/autoload";
 import { FastifyPluginAsync, FastifyServerOptions } from "fastify";
 import { logger } from "@/config/logger";
+// import fs from "node:fs";
 
 export interface AppOptions extends FastifyServerOptions, Partial<AutoloadPluginOptions> {}
 // Pass --options via CLI arguments in command to enable these options.
@@ -78,6 +79,10 @@ const app: FastifyPluginAsync<AppOptions> = async (fastify, opts): Promise<void>
     dir: join(__dirname, "modules"),
     options: { ...opts, prefix: "/api" },
   });
+
+  // await fastify.ready();
+  // const yamlDocs = fastify.swagger({ yaml: true });
+  // fs.writeFileSync("docs/docs.yaml", yamlDocs);
 };
 
 export default app;

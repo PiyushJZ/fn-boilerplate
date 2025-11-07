@@ -6,24 +6,12 @@ import swaggerUi, { FastifySwaggerUiOptions } from "@fastify/swagger-ui";
  * */
 export default fp<FastifySwaggerUiOptions>(async (fastify) => {
   await fastify.register(swaggerUi, {
-    routePrefix: "/documentation",
+    routePrefix: "/docs",
     uiConfig: {
       docExpansion: "full",
-      deepLinking: false,
-    },
-    uiHooks: {
-      onRequest: function (request, reply, next) {
-        next();
-      },
-      preHandler: function (request, reply, next) {
-        next();
-      },
+      deepLinking: true,
     },
     staticCSP: true,
-    transformStaticCSP: (header) => header,
-    transformSpecification: (swaggerObject, request, reply) => {
-      return swaggerObject;
-    },
     transformSpecificationClone: true,
   });
 });

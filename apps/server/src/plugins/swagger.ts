@@ -1,6 +1,6 @@
 import fp from "fastify-plugin";
 import swagger, { FastifySwaggerOptions } from "@fastify/swagger";
-import Config from "@/config/config";
+import Config from "@/config";
 
 /**
  * This plugin adds important security headers

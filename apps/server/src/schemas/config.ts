@@ -3,6 +3,7 @@ import { ajv, JSONSchemaType } from "./index";
 export interface Config {
   NODE_ENV: string;
   PORT: number | string;
+  DB_URL: string;
   FASTIFY_ADDRESS: string;
   FASTIFY_LOG_LEVEL: string;
   LOKI_URL: string;
@@ -17,7 +18,8 @@ const schema: JSONSchemaType<Config> = {
       enum: ["dev", "prod", "staging", "test"],
     },
     PORT: { type: "number" },
-    FASTIFY_ADDRESS: { type: "string", format: "uri" },
+    DB_URL: { type: "string", format: "uri" },
+    FASTIFY_ADDRESS: { type: "string" },
     FASTIFY_LOG_LEVEL: {
       type: "string",
       enum: ["debug", "info", "warn", "error"],
@@ -25,7 +27,15 @@ const schema: JSONSchemaType<Config> = {
     LOKI_URL: { type: "string", format: "uri" },
     LOGS_PATH: { type: "string" },
   },
-  required: ["NODE_ENV", "LOKI_URL", "LOGS_PATH"],
+  required: [
+    "NODE_ENV",
+    "PORT",
+    "DB_URL",
+    "FASTIFY_ADDRESS",
+    "FASTIFY_LOG_LEVEL",
+    "LOKI_URL",
+    "LOGS_PATH",
+  ],
   additionalProperties: false,
 };
 

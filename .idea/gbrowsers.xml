@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GBrowserService"><![CDATA[{
+  "defaultHomePage": "",
+  "isDebugEnabled": true,
+  "isDevToolsInDialog": true,
+  "theme": "LIGHT",
+  "history": [
+    {
+      "name": "GBrowser - IntelliJ IDEs Plugin | Marketplace",
+      "url": "https://plugins.jetbrains.com/plugin/14458-gbrowser"
+    },
+    {
+      "name": "localhost:8080",
+      "url": "http://localhost:8080/"
+    },
+    {
+      "name": "localhost:8080/docs",
+      "url": "http://localhost:8080/docs"
+    },
+    {
+      "name": "localhost:63342/fn-boilerplate/apps/server/tmp/doc.html?_ijt=kg2omeov2fh30oum92vn2bvgle&_ij_reload=RELOAD_ON_SAVE",
+      "url": "http://localhost:63342/fn-boilerplate/apps/server/tmp/doc.html?_ijt=kg2omeov2fh30oum92vn2bvgle&_ij_reload=RELOAD_ON_SAVE"
+    },
+    {
+      "name": "localhost:8080/docs/json",
+      "url": "http://localhost:8080/docs/json"
+    }
+  ]
+}]]></component>
+</project>
