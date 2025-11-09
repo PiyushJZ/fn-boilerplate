@@ -1,13 +1,12 @@
 import { join } from "node:path";
 import AutoLoad, { AutoloadPluginOptions } from "@fastify/autoload";
 import { FastifyPluginAsync, FastifyServerOptions } from "fastify";
-import { logger } from "@/config/logger";
-// import fs from "node:fs";
+import { loggerConfig } from "@/config/logger";
 
 export interface AppOptions extends FastifyServerOptions, Partial<AutoloadPluginOptions> {}
 // Pass --options via CLI arguments in command to enable these options.
 const options: AppOptions = {
-  logger: logger,
+  logger: loggerConfig,
   requestIdHeader: "x-request-id",
   requestIdLogLabel: "reqId",
   genReqId: (req) => {
@@ -17,7 +16,6 @@ const options: AppOptions = {
     return reqId || `req-${Date.now()}-${Math.random().toString(36).substring(2, 10)}`;
   },
   trustProxy: true,
-  ignoreTrailingSlash: true,
 };
 
 const app: FastifyPluginAsync<AppOptions> = async (fastify, opts): Promise<void> => {

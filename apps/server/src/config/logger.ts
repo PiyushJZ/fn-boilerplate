@@ -1,8 +1,8 @@
-import pino from "pino";
 import Config from "./index";
+import pino from "pino";
 
-export const logger = pino({
-  level: "info",
+export const loggerConfig = {
+  level: "debug",
   transport: {
     targets: [
       {
@@ -10,7 +10,7 @@ export const logger = pino({
         level: "info",
         options: {
           colorize: true,
-          translateTime: "HH:MM:ss",
+          translateTime: "dd/mm/yy HH:MM:ss",
           ignore: "pid,hostname",
         },
       },
@@ -24,4 +24,14 @@ export const logger = pino({
       },
     ],
   },
-});
+};
+
+const logger = pino(loggerConfig);
+
+// Override console methods to use Pino
+console.log = (...args) => logger.info(args.length === 1 ? args[0] : args);
+console.info = (...args) => logger.info(args.length === 1 ? args[0] : args);
+console.warn = (...args) => logger.warn(args.length === 1 ? args[0] : args);
+console.error = (...args) => logger.error(args.length === 1 ? args[0] : args);
+
+export default logger;
