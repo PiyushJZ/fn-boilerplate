@@ -3,14 +3,7 @@ import rateLimit, { FastifyRateLimitOptions } from "@fastify/rate-limit";
 import Redis from "ioredis";
 import Config from "@/config";
 
-// Config.REDIS_RATE_LIMIT is expected to be "host:port"
-const [rateHost, ratePortStr] = Config.REDIS_RATE_LIMIT.split(":");
-const ratePort = Number(ratePortStr || 6379);
-const redis = new Redis({
-  host: rateHost,
-  port: ratePort,
-  lazyConnect: true,
-});
+const redis = new Redis(Config.REDIS_RATE_LIMIT);
 
 /**
  * This plugin limits api calls from a single source
@@ -30,14 +23,5 @@ export default fp<FastifyRateLimitOptions>(async (fastify) => {
     redis,
     nameSpace: "fb-boilerplate-rate-limit",
     continueExceeding: false,
-  });
-
-  // Close redis on server shutdown to avoid Jest open handle leaks
-  fastify.addHook("onClose", async () => {
-    try {
-      await redis.quit();
-    } catch {
-      // ignore
-    }
   });
 });

@@ -1,9 +1,7 @@
 import Redis from "ioredis";
 import Config from "@/config";
 
-const redis = new Redis({
-  host: Config.REDIS_CACHE,
-});
+const redis = new Redis(Config.REDIS_CACHE);
 
 export default class RedisCache {
   static async get(key: string) {

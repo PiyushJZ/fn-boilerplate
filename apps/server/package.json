@@ -42,8 +42,6 @@
     "pino": "^9.14.0"
   },
   "devDependencies": {
-    "@testcontainers/postgresql": "^11.8.1",
-    "@testcontainers/redis": "^11.8.1",
     "@types/jest": "^30.0.0",
     "@types/node": "^22.1.0",
     "@types/ws": "^8.18.1",
@@ -52,7 +50,6 @@
     "jest": "^30.2.0",
     "prisma": "^6.18.0",
     "rimraf": "^4.4.1",
-    "testcontainers": "^11.8.1",
     "ts-jest": "^29.2.5",
     "ts-node": "^10.4.0",
     "tsc-alias": "^1.8.16",
