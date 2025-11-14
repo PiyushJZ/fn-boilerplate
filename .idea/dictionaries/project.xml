@@ -1,7 +1,10 @@
 <component name="ProjectDictionaryState">
   <dictionary name="project">
     <words>
+      <w>allkeys</w>
       <w>formkit</w>
+      <w>maxmemory</w>
+      <w>noeviction</w>
       <w>nuxtjs</w>
       <w>rapi</w>
     </words>

@@ -71,16 +71,12 @@ const app: FastifyPluginAsync<AppOptions> = async (fastify, opts): Promise<void>
   });
 
   // This loads all plugins defined in modules
-  // define your modules in one of these
+  // define your modules in one of these dirs
   // eslint-disable-next-line no-void
   void fastify.register(AutoLoad, {
     dir: join(__dirname, "modules"),
     options: { ...opts, prefix: "/api" },
   });
-
-  // await fastify.ready();
-  // const yamlDocs = fastify.swagger({ yaml: true });
-  // fs.writeFileSync("docs/docs.yaml", yamlDocs);
 };
 
 export default app;

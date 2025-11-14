@@ -11,6 +11,10 @@ const config: Config = {
   FASTIFY_LOG_LEVEL: process.env.FASTIFY_LOG_LEVEL ?? "info",
   LOKI_URL: process.env.LOKI_URL ?? "http://localhost:3100",
   LOGS_PATH: process.env.LOGS_PATH ?? "tmp/logs/server.log",
+  ORIGIN: process.env.ORIGIN ?? "*",
+  // Prefer specific vars if provided; fall back to REDIS_URL; use host:port format (no http scheme)
+  REDIS_CACHE: process.env.REDIS_CACHE || process.env.REDIS_URL || "redis:6379",
+  REDIS_RATE_LIMIT: process.env.REDIS_RATE_LIMIT || process.env.REDIS_URL || "redis:6380",
 };
 
 if (!validate(config)) {

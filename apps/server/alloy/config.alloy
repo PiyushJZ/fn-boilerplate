@@ -1,0 +1,42 @@
+loki.source.file "app_logs" {
+  targets = [
+    {
+      __path__ = env("LOGS_PATH"),
+      job      = env("SERVICE_NAME"),
+      env      = env("NODE_ENV"),
+    },
+  ]
+  forward_to = [loki.process.logs_parser.receiver]
+}
+
+loki.process "logs_parser" {
+  stage.json {
+    expressions = {
+      level     = "level",
+      timestamp = "time",
+      msg       = "msg",
+    }
+  }
+
+  stage.labels {
+    values = {
+      level = "",
+    }
+  }
+
+  forward_to = [loki.write.endpoint.receiver]
+}
+
+loki.write "endpoint" {
+  endpoint {
+    url = env("LOKI_URL")
+    basic_auth {
+      username = env("LOKI_USER")
+      password = env("LOKI_PASS")
+    }
+  }
+
+  external_labels = {
+    env     = env("NODE_ENV"),
+  }
+}

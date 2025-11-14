@@ -8,6 +8,9 @@ export interface Config {
   FASTIFY_LOG_LEVEL: string;
   LOKI_URL: string;
   LOGS_PATH: string;
+  ORIGIN: string;
+  REDIS_CACHE: string;
+  REDIS_RATE_LIMIT: string;
 }
 
 const schema: JSONSchemaType<Config> = {
@@ -26,6 +29,9 @@ const schema: JSONSchemaType<Config> = {
     },
     LOKI_URL: { type: "string", format: "uri" },
     LOGS_PATH: { type: "string" },
+    ORIGIN: { type: "string" },
+    REDIS_CACHE: { type: "string" },
+    REDIS_RATE_LIMIT: { type: "string" },
   },
   required: [
     "NODE_ENV",
@@ -35,6 +41,9 @@ const schema: JSONSchemaType<Config> = {
     "FASTIFY_LOG_LEVEL",
     "LOKI_URL",
     "LOGS_PATH",
+    "ORIGIN",
+    "REDIS_CACHE",
+    "REDIS_RATE_LIMIT",
   ],
   additionalProperties: false,
 };

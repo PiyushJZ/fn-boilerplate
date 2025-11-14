@@ -7,7 +7,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "tsc -p test/tsconfig.json && c8 node --test -r ts-node/register \"test/**/*.ts\"",
+    "test": "jest --runInBand",
     "start": "node dist/server.js",
     "build": "rimraf dist && tsc && tsc-alias",
     "watch": "concurrently \"tsc -w\" \"tsc-alias -w\"",
@@ -38,20 +38,22 @@
     "fastify": "^5.0.0",
     "fastify-cli": "^7.4.0",
     "fastify-plugin": "^5.0.0",
-    "pg": "^8.16.3",
-    "pino": "^9.14.0",
-    "pino-loki": "^2.6.0"
+    "ioredis": "^5.8.2",
+    "pino": "^9.14.0"
   },
   "devDependencies": {
+    "@testcontainers/postgresql": "^11.8.1",
+    "@testcontainers/redis": "^11.8.1",
+    "@types/jest": "^30.0.0",
     "@types/node": "^22.1.0",
     "@types/ws": "^8.18.1",
-    "c8": "^10.1.2",
     "concurrently": "^9.0.0",
     "fastify-tsconfig": "^3.0.0",
     "jest": "^30.2.0",
     "prisma": "^6.18.0",
     "rimraf": "^4.4.1",
-    "supertest": "^7.1.4",
+    "testcontainers": "^11.8.1",
+    "ts-jest": "^29.2.5",
     "ts-node": "^10.4.0",
     "tsc-alias": "^1.8.16",
     "typescript": "~5.8.2"
