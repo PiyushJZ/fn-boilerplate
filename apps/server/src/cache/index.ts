@@ -17,7 +17,7 @@ export default class RedisCache {
     return this.client;
   }
 
-  private static async disconnect(): Promise<void> {
+  static async disconnect(): Promise<void> {
     if (this.client && !this.isClosing) {
       this.isClosing = true;
       await this.client.quit();
@@ -56,20 +56,22 @@ export default class RedisCache {
   // Cache usage methods
 
   /**
-   * Get string value for a key
+   * Get value for a key
    */
-  static async getText(key: string): Promise<String | null> {
-    const client = this.getClient();
-    return client.get(key);
-  }
-
-  /**
-   * Get object value for a key
-   */
-  static async getObject<T>(key: string): Promise<T | null> {
+  static async get(key: string): Promise<String | Number | Object | null> {
     const client = this.getClient();
     const val = await client.get(key);
-    return val ? JSON.parse(val) : null;
+    if (!val) {
+      return null;
+    }
+    if (!isNaN(Number(val))) {
+      return Number(val);
+    }
+    try {
+      return JSON.parse(val);
+    } catch {
+      return val;
+    }
   }
 
   /**

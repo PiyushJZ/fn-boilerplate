@@ -1,8 +1,7 @@
 import Fastify, { FastifyInstance } from "fastify";
 import app from "@/app";
 
-// Tests use Fastify's inject() (light-my-request under the hood) and Jest syntax.
-
+// Testing the root module
 describe("Root module APIs", () => {
   let server: FastifyInstance;
 
@@ -16,9 +15,11 @@ describe("Root module APIs", () => {
     await server.close();
   });
 
-  it("GET /api/ping should respond with 200 and 'pong'", async () => {
-    const res = await server.inject({ method: "GET", url: "/api/ping" });
-    expect(res.statusCode).toBe(200);
-    expect(res.payload).toBe("pong");
+  describe("GET /api/ping", () => {
+    it("should respond with status code 200 and text 'pong'", async () => {
+      const res = await server.inject({ method: "GET", url: "/api/ping" });
+      expect(res.statusCode).toBe(200);
+      expect(res.payload).toBe("pong");
+    });
   });
 });
