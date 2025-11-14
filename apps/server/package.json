@@ -7,7 +7,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "jest --runInBand",
+    "test": "jest",
     "start": "node dist/server.js",
     "build": "rimraf dist && tsc && tsc-alias",
     "watch": "concurrently \"tsc -w\" \"tsc-alias -w\"",

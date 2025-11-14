@@ -12,4 +12,8 @@ export default fp(async (fastify) => {
   fastify.register(fastifyPrisma, {
     client: new PrismaClient(),
   });
+
+  fastify.addHook("onClose", async (instance) => {
+    await instance.prisma.$disconnect();
+  });
 });
