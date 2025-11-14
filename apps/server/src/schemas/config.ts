@@ -11,6 +11,7 @@ export interface Config {
   ORIGIN: string;
   REDIS_CACHE: string;
   REDIS_RATE_LIMIT: string;
+  REDIS_JOBS: string;
 }
 
 const schema: JSONSchemaType<Config> = {
@@ -32,6 +33,7 @@ const schema: JSONSchemaType<Config> = {
     ORIGIN: { type: "string" },
     REDIS_CACHE: { type: "string" },
     REDIS_RATE_LIMIT: { type: "string" },
+    REDIS_JOBS: { type: "string" },
   },
   required: [
     "NODE_ENV",
@@ -44,6 +46,7 @@ const schema: JSONSchemaType<Config> = {
     "ORIGIN",
     "REDIS_CACHE",
     "REDIS_RATE_LIMIT",
+    "REDIS_JOBS",
   ],
   additionalProperties: false,
 };
