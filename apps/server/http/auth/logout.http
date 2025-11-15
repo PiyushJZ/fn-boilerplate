@@ -1,0 +1,10 @@
+### POST request for logout
+POST {{host}}/auth/logout
+Content-Type: application/json
+Accept: application/json
+
+{
+  "username": "piyushjz",
+  "token": "fkl;asdjfl;j"
+}
+

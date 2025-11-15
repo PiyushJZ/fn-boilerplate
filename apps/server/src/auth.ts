@@ -69,7 +69,11 @@ export const auth = betterAuth({
   },
   plugins: [
     twoFactor(),
-    username(),
+    username({
+      minUsernameLength: 2,
+      maxUsernameLength: 20,
+      usernameNormalization: false,
+    }),
     phoneNumber(),
     passkey(),
     admin(),
