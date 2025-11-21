@@ -3,6 +3,14 @@ import app from "@/app";
 
 describe("Auth APIs", () => {
   let server: FastifyInstance;
+  const loginInput = {
+    email: "pj@gmail.com",
+    password: "Passw0rd",
+  };
+  const loginResponse = {
+    email: "test@example.com",
+    name: "Test",
+  };
 
   beforeAll(async () => {
     server = Fastify({ logger: false });
@@ -15,30 +23,32 @@ describe("Auth APIs", () => {
   });
 
   describe("Login", () => {
-    test.skip("POST /api/login authenticates and returns session/cookies", async () => {
-      // Example (replace when actual contract is confirmed):
-      // const res = await server.inject({
-      //   method: "POST",
-      //   url: "/api/login",
-      //   payload: { email: "user@example.com", password: "pass1234" },
-      // });
-      // expect(res.statusCode).toBe(200);
-      // expect(res.json()).toMatchObject({ user: expect.any(Object) });
-      // expect(res.cookies?.some(c => c.name.includes("session"))).toBeTruthy();
+    it("POST /api/auth/login authenticates and returns session/cookies", async () => {
+      const res = await server.inject({
+        method: "POST",
+        url: "/api/auth/login",
+        payload: loginInput,
+      });
+      expect(res.statusCode).toBe(200);
+      expect(res.json()).toMatchObject(loginResponse);
+      expect(res.cookies?.some((c) => c.name === "fn_boilerplate.session_token")).toBeTruthy();
     });
   });
 
   describe("Logout", () => {
-    test.skip("POST /api/logout terminates the session", async () => {
-      // Example flow (replace when actual contract is confirmed):
-      // const login = await server.inject({
-      //   method: "POST",
-      //   url: "/api/login",
-      //   payload: { email: "user@example.com", password: "pass1234" },
-      // });
-      // const cookies = login.cookies?.map(c => `${c.name}=${c.value}`).join("; ") ?? "";
-      // const res = await server.inject({ method: "POST", url: "/api/logout", headers: { cookie: cookies } });
-      // expect(res.statusCode).toBe(200);
+    it("POST /api/auth/logout logs the user out and terminates the session", async () => {
+      const login = await server.inject({
+        method: "POST",
+        url: "/api/auth/login",
+        payload: loginInput,
+      });
+      const cookies = login.cookies?.map((c) => `${c.name}=${c.value}`).join("; ") ?? "";
+      const res = await server.inject({
+        method: "POST",
+        url: "/api/auth/logout",
+        headers: { cookie: cookies },
+      });
+      expect(res.statusCode).toBe(200);
     });
   });
 });

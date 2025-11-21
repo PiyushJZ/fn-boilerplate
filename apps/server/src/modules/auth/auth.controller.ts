@@ -7,12 +7,15 @@ export const login = async (request: FastifyRequest<{ Body: LoginBody }>, reply:
   const { email, password } = request.body;
   const headers = request.headers;
   try {
-    const data = await auth.api.signInEmail({ body: { email, password }, headers });
+    const data = await auth.api.signInEmail({
+      body: { email, password, rememberMe: true },
+      headers,
+    });
     if (!data.user.emailVerified) {
       return reply.forbidden("EMAIL_NOT_VERIFIED");
     }
-    return reply.code(200).send({
-      token: data.token,
+    console.log("Login successful:", data);
+    return reply.code(200).setCookie("fn_boilerplate.session_token", data.token).send({
       email: data.user.email,
       name: data.user.name,
       image: data.user.image,
@@ -49,6 +52,7 @@ export const signup = async (
     await auth.api.signUpEmail({
       body: { email, name, password },
     });
+    await request.server.prisma.user.update({ where: { email }, data: { emailVerified: true } });
     return reply.code(201).send({ message: "SIGNUP_SUCCESSFUL" });
   } catch (error) {
     console.error(`Signup Error: ${error}`);

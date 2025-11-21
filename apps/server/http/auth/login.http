@@ -2,9 +2,9 @@
 POST {{host}}/auth/login
 Content-Type: application/json
 Accept: application/json
+Set-Cookie: fn_boilerplate.session_token
 
 {
-  "username": "piyushjz",
-  "password": "jfksdflj"
+  "email": "pj@gmail.com",
+  "password": "Passw0rd"
 }
-

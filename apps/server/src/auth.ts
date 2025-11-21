@@ -22,7 +22,7 @@ export const auth = betterAuth({
   }),
   advanced: {
     useSecureCookies: true,
-    cookiePrefix: "fn-boilerplate",
+    cookiePrefix: "fn_boilerplate",
   },
   session: {
     expiresIn: 60 * 60 * 24 * 5,
