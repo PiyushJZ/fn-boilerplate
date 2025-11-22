@@ -1,0 +1,7 @@
+.env
+.env.*
+node_modules
+docs
+http
+test
+jest.config.ts
