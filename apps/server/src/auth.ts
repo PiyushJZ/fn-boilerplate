@@ -12,7 +12,6 @@ import {
   oAuthProxy,
   openAPI,
 } from "better-auth/plugins";
-import { passkey } from "better-auth/plugins/passkey";
 import { PrismaClient } from "@/generated/prisma/client";
 
 const prisma = new PrismaClient();
@@ -75,7 +74,6 @@ export const auth = betterAuth({
       usernameNormalization: false,
     }),
     phoneNumber(),
-    passkey(),
     admin(),
     apiKey(),
     organization(),

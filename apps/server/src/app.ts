@@ -2,6 +2,7 @@ import { join } from "node:path";
 import AutoLoad, { AutoloadPluginOptions } from "@fastify/autoload";
 import { FastifyPluginAsync, FastifyServerOptions } from "fastify";
 import { loggerConfig } from "@/config/logger";
+import { HttpError } from "@fastify/sensible";
 
 export interface AppOptions extends FastifyServerOptions, Partial<AutoloadPluginOptions> {}
 // Pass --options via CLI arguments in command to enable these options.
@@ -35,15 +36,34 @@ const app: FastifyPluginAsync<AppOptions> = async (fastify, opts): Promise<void>
   });
 
   fastify.setErrorHandler((error, request, reply) => {
-    const statusCode = error.statusCode || 500;
+    if (error instanceof HttpError) {
+      const statusCode = error.statusCode || reply.statusCode || 500;
 
+      request.log.error(
+        {
+          err: {
+            type: error.name,
+            message: error.message,
+            stack: error.stack,
+          },
+          url: request.url,
+          userAgent: request.headers["user-agent"],
+          payload: request.body,
+          method: request.method,
+          statusCode: statusCode,
+        },
+        "Request error occurred",
+      );
+
+      return reply.status(statusCode).send({
+        error: error.message,
+        statusCode: statusCode,
+      });
+    }
+    const statusCode = reply.statusCode || 500;
     request.log.error(
       {
-        err: {
-          type: error.name,
-          message: error.message,
-          stack: error.stack,
-        },
+        err: error,
         url: request.url,
         userAgent: request.headers["user-agent"],
         payload: request.body,
@@ -52,11 +72,7 @@ const app: FastifyPluginAsync<AppOptions> = async (fastify, opts): Promise<void>
       },
       "Request error occurred",
     );
-
-    reply.status(statusCode).send({
-      error: error.message,
-      statusCode: statusCode,
-    });
+    return reply.status(statusCode).send(error);
   });
 
   // Do not touch the following lines

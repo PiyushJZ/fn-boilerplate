@@ -9,6 +9,7 @@ describe("Cache Utilities", () => {
   const TTL = 5000;
 
   afterAll(async () => {
+    await Cache.flush();
     await Cache.disconnect();
   });
 

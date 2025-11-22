@@ -1,4 +1,3 @@
-
 generator client {
   provider     = "prisma-client"
   output       = "../src/generated/prisma"
@@ -16,8 +15,8 @@ model User {
   email               String
   emailVerified       Boolean      @default(false)
   image               String?
-  createdAt           DateTime     @default(now())
-  updatedAt           DateTime     @default(now()) @updatedAt
+  createdAt           DateTime     @default(now()) @map("ctime")
+  updatedAt           DateTime     @default(now()) @updatedAt @map("mtime")
   twoFactorEnabled    Boolean?     @default(false)
   username            String?
   displayUsername     String?
@@ -38,15 +37,15 @@ model User {
   @@unique([email])
   @@unique([username])
   @@unique([phoneNumber])
-  @@map("user")
+  @@map("users")
 }
 
 model Session {
   id                   String   @id
   expiresAt            DateTime
   token                String
-  createdAt            DateTime @default(now())
-  updatedAt            DateTime @updatedAt
+  createdAt            DateTime @default(now()) @map("ctime")
+  updatedAt            DateTime @updatedAt @map("mtime")
   ipAddress            String?
   userAgent            String?
   userId               String
@@ -55,7 +54,7 @@ model Session {
   activeOrganizationId String?
 
   @@unique([token])
-  @@map("session")
+  @@map("sessions")
 }
 
 model Account {
@@ -71,10 +70,10 @@ model Account {
   refreshTokenExpiresAt DateTime?
   scope                 String?
   password              String?
-  createdAt             DateTime  @default(now())
-  updatedAt             DateTime  @updatedAt
+  createdAt             DateTime  @default(now()) @map("ctime")
+  updatedAt             DateTime  @updatedAt @map("mtime")
 
-  @@map("account")
+  @@map("accounts")
 }
 
 model Verification {
@@ -82,10 +81,10 @@ model Verification {
   identifier String
   value      String
   expiresAt  DateTime
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @default(now()) @updatedAt
+  createdAt  DateTime @default(now()) @map("ctime")
+  updatedAt  DateTime @default(now()) @updatedAt @map("mtime")
 
-  @@map("verification")
+  @@map("verifications")
 }
 
 model TwoFactor {
@@ -95,7 +94,7 @@ model TwoFactor {
   userId      String
   user        User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  @@map("twoFactor")
+  @@map("two_factors")
 }
 
 model Passkey {
@@ -109,10 +108,10 @@ model Passkey {
   deviceType   String
   backedUp     Boolean
   transports   String?
-  createdAt    DateTime?
+  createdAt    DateTime? @map("ctime")
   aaguid       String?
 
-  @@map("passkey")
+  @@map("passkeys")
 }
 
 model Apikey {
@@ -134,12 +133,12 @@ model Apikey {
   remaining           Int?
   lastRequest         DateTime?
   expiresAt           DateTime?
-  createdAt           DateTime
-  updatedAt           DateTime
+  createdAt           DateTime  @map("ctime")
+  updatedAt           DateTime  @updatedAt @map("mtime")
   permissions         String?
   metadata            String?
 
-  @@map("apikey")
+  @@map("apikeys")
 }
 
 model Organization {
@@ -147,13 +146,13 @@ model Organization {
   name        String
   slug        String
   logo        String?
-  createdAt   DateTime
+  createdAt   DateTime     @map("ctime")
   metadata    String?
   members     Member[]
   invitations Invitation[]
 
   @@unique([slug])
-  @@map("organization")
+  @@map("organizations")
 }
 
 model Member {
@@ -163,9 +162,9 @@ model Member {
   userId         String
   user           User         @relation(fields: [userId], references: [id], onDelete: Cascade)
   role           String
-  createdAt      DateTime
+  createdAt      DateTime     @map("ctime")
 
-  @@map("member")
+  @@map("members")
 }
 
 model Invitation {
@@ -179,5 +178,5 @@ model Invitation {
   inviterId      String
   user           User         @relation(fields: [inviterId], references: [id], onDelete: Cascade)
 
-  @@map("invitation")
+  @@map("invitations")
 }

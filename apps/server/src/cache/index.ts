@@ -54,7 +54,6 @@ export default class RedisCache {
   }
 
   // Cache usage methods
-
   /**
    * Get value for a key
    */
@@ -120,5 +119,13 @@ export default class RedisCache {
   static async decrement(key: string, by: number) {
     const client = this.getClient();
     await client.decrby(key, by);
+  }
+
+  /**
+   * Flush all keys from the cache
+   */
+  static async flush() {
+    const client = this.getClient();
+    await client.flushdb();
   }
 }
