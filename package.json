@@ -8,18 +8,22 @@
   ],
   "devDependencies": {
     "husky": "^9.1.7",
-    "lerna": "^9.0.0",
     "prettier": "^3.6.2",
-    "prettier-plugin-tailwindcss": "^0.7.1"
+    "prettier-plugin-tailwindcss": "^0.7.1",
+    "turbo": "^2.6.1"
   },
   "scripts": {
-    "dev": "lerna run dev --parallel",
-    "build": "lerna run build --parallel",
-    "test": "lerna run test --parallel",
-    "lint": "lerna run lint --parallel",
+    "dev": "turbo run dev --parallel",
+    "dev:server": "turbo run dev --filter=server",
+    "dev:ui": "turbo run dev --filter=ui",
+    "build": "turbo run build --parallel",
+    "start": "turbo run start --parallel",
+    "test": "turbo run test --parallel",
+    "lint": "turbo run lint --parallel",
     "prepare": "husky"
   },
   "engines": {
     "node": ">=24.11.0"
-  }
+  },
+  "packageManager": "npm@11.6.1"
 }
